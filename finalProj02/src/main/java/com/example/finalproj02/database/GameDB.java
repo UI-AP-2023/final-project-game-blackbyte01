@@ -6,16 +6,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 abstract public class GameDB {
-    private final Connection connection;
+    private DBConnection dbConnection;
     private Statement statement;
     private String SQLCommand;
 
-    public GameDB(Connection connection){
-        this.connection=connection;
+    public GameDB(){
+        try {
+            dbConnection=new DBConnection("jdbc:mysql://localhost/game", "root", "");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Connection getConnection() {
-        return connection;
+    public DBConnection getDbConnection() {
+        return dbConnection;
     }
 
     public Statement getStatement() {
@@ -34,10 +38,10 @@ abstract public class GameDB {
         this.SQLCommand = SQLCommand;
     }
 
-    public boolean executeSQLCommand(){   // executeUpdate() method
+    public void executeSQLCommand(){   // executeUpdate() method
         try {
-            statement=connection.prepareStatement(SQLCommand);
-            return statement.execute(SQLCommand);
+            statement=dbConnection.getConnection().prepareStatement(SQLCommand);
+            statement.execute(SQLCommand);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,7 +49,7 @@ abstract public class GameDB {
 
     public ResultSet executeQuerySQLCommand(){
         try {
-            statement=connection.prepareStatement(SQLCommand);
+            statement=dbConnection.getConnection().prepareStatement(SQLCommand);
             return statement.executeQuery(SQLCommand);
         } catch (SQLException e) {
             e.printStackTrace();
