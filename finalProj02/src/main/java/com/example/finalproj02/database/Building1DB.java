@@ -16,7 +16,7 @@ public class Building1DB extends GameDB{
     }
 
     public void insertBuilding1(int mapID, Building1 building1){
-        super.setSQLCommand(String.format("INSERT INTO `building1s`(`map-id`, `x`, `y`, `width`, `height`) VALUES ('%s','%s','%s','%s','%s')", mapID, building1.getX(), building1.getY(), building1.getWidth(), building1.getHeight()));
+        super.setSQLCommand(String.format("INSERT INTO `building1s`(`map-id`, `x`, `y`, `width`, `height`) VALUES ('%s','%s','%s','%s','%s')", mapID, building1.getMinX(), building1.getMinY(), building1.getImageView().getFitWidth(), building1.getImageView().getFitHeight()));
         executeSQLCommand();
     }
 
