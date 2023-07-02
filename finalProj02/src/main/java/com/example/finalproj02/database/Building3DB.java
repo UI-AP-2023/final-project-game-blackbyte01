@@ -16,12 +16,12 @@ public class Building3DB extends GameDB{
     }
 
     public void insertBuilding3(int mapID, Building3 building3){
-        super.setSQLCommand(String.format("INSERT INTO `building3s`(`map-id`, `x`, `y`, `width`, `height`) VALUES ('%s','%s','%s','%s','%s')", mapID, building3.getX(), building3.getY(), building3.getWidth(), building3.getHeight()));
+        super.setSQLCommand(String.format("INSERT INTO `building3s`(`map-id`, `x`, `y`, `width`, `height`) VALUES ('%s','%s','%s','%s','%s')", mapID, building3.getMinX(), building3.getMinY(), building3.getImageView().getFitWidth(), building3.getImageView().getFitHeight()));
         executeSQLCommand();
     }
 
     public ArrayList<Building3> findMapBuilding3s(int mapID) throws SQLException {
-        super.setSQLCommand(String.format("SELECT * FROM `building1s` WHERE `building1s`.`map-id`='%s'", mapID));
+        super.setSQLCommand(String.format("SELECT * FROM `building3s` WHERE `building3s`.`map-id`='%s'", mapID));
         ResultSet resultSet=executeQuerySQLCommand();
         ArrayList<Building3> building3s=new ArrayList<>();
         while (resultSet.next()){

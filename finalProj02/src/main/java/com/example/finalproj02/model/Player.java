@@ -30,7 +30,9 @@ public class Player {
     }
 
     public Player(int playerID, String username, String nickname, String password, int level, int wonBattles, int lostBattles){
+        this.playerID=playerID;
         this.username=username;
+        this.nickname=nickname;
         this.password=password;
         this.wonBattles=wonBattles;
         this.lostBattles=lostBattles;
@@ -91,5 +93,26 @@ public class Player {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    @Override
+    public String toString() {
+        if(map==null){
+            return "ID: " + playerID +
+                    "\nusername:  " + username +
+                    "\npassword:  " + password +
+                    "\nnickname:  " + nickname +
+                    "\nlevel:  " + level +
+                    "\nwon plays:  " + wonBattles +
+                    "\nlost plays:  " + lostBattles;
+        }
+        return "ID: " + playerID +
+                "\nusername:  " + username +
+                "\npassword:  " + password +
+                "\nnickname:  " + nickname +
+                "\nlevel:  " + level +
+                "\nwon plays:  " + wonBattles +
+                "\nlost plays:  " + lostBattles +
+                "\nmap ID:  " + map.getMapID();
     }
 }

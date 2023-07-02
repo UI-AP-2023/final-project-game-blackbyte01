@@ -41,4 +41,34 @@ public class PlayersDB extends GameDB {
         }
         return player;
     }
+
+    public int findMinPlayerID() throws SQLException {
+        super.setSQLCommand("SELECT MIN(`players`.`player-id`) FROM `players`");
+        ResultSet resultSet=executeQuerySQLCommand();
+        int playerID=0;
+        while (resultSet.next()){
+            playerID= resultSet.getInt(1);
+        }
+        return playerID;
+    }
+
+    public int findMaxPlayerID() throws SQLException {
+        super.setSQLCommand("SELECT MAX(`players`.`player-id`) FROM `players`");
+        ResultSet resultSet=executeQuerySQLCommand();
+        int playerID=0;
+        while (resultSet.next()){
+            playerID= resultSet.getInt(1);
+        }
+        return playerID;
+    }
+
+    public Player findPlayer(int playerID) throws SQLException {
+        super.setSQLCommand(String.format("SELECT `player-id`, `username`, `nickname`, `password`, `level`, `won-battles`, `lost-battles` FROM `players` WHERE `players`.`player-id`='%s'", playerID));
+        ResultSet resultSet=executeQuerySQLCommand();
+        Player player=null;
+        while (resultSet.next()){
+            player= new Player(resultSet.getInt("player-id"), resultSet.getString("username"), resultSet.getString("nickname"), resultSet.getString("password"), resultSet.getInt("level"), resultSet.getInt("won-battles"), resultSet.getInt("lost-battles"));
+        }
+        return player;
+    }
 }
