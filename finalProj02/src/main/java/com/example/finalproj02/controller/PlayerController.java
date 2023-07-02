@@ -28,4 +28,16 @@ public class PlayerController {
     public Player login(String username, String password) throws SQLException {
         return playersDB.findPlayer(username, password);
     }
+
+    public Player getPlayer(int playerID) throws SQLException {
+        return playersDB.findPlayer(playerID);
+    }
+
+    public int getMinPlayerID() throws SQLException {
+        return playersDB.findMinPlayerID();
+    }
+
+    public int getMaxPlayerID() throws SQLException {
+        return playersDB.findMaxPlayerID();
+    }
 }
