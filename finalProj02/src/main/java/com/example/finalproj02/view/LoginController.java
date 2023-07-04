@@ -38,9 +38,9 @@ public class LoginController implements Initializable {
         player=playerController.login(usernameTf.getText(), passwordTf.getText());
         Map map=mapController.findMap(player.getPlayerID());
         player.setMap(map);
-        System.out.println(player.getUsername());
-        System.out.println(player.getMap().getMapID());
-        System.out.println(player.getPlayerID());
+        //System.out.println(player.getUsername());
+        //System.out.println(player.getMap().getMapID());
+        //System.out.println(player.getPlayerID());
         new HomeApplication(player).start((Stage) ((Node)event.getSource()).getScene().getWindow());
     }
 

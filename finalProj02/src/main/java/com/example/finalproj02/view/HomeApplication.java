@@ -27,6 +27,7 @@ public class HomeApplication extends Application {
         //homeController.show1();
         homeController.show2();
         homeController.show3();
+        homeController.show4();
         primaryStage.setTitle("Home Page");
         primaryStage.setScene(scene);
         primaryStage.show();
