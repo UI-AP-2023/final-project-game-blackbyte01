@@ -1,0 +1,88 @@
+.tab-pane:top{
+    -fx-background-color: rgb(0,0,0,0.5);
+    -fx-pref-height: 500;
+    -fx-border-color: transparent;
+}
+
+.tab-pane *.tab-header-area{
+    -fx-background-insets: 0 0 0 10;
+    -fx-padding: 0 0 0 0;
+}
+
+.tab-pane *.tab-header-background{
+    -fx-background-color:transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+
+.tab .tab-label{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-font-family: "Comic Sans MS";
+    -fx-alignment: center;
+}
+
+.tab {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 10;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+
+.tab:focused{
+    -fx-background-color: rgb(225, 225, 225,0.5);
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.tab:selected{
+    -fx-background-color: rgb(225, 225, 225, 0.5);
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.label{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-font-family: "Comic Sans MS";
+}
+
+#playerInfoLabel{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 20;
+}
+
+#CMapLbl{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 20;
+}
+
+#bgImagePane{
+    -fx-background-color: rgb(225, 225, 225, 0.35);
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.pane{
+    -fx-background-color: rgb(225, 225, 225, 0.35);
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
