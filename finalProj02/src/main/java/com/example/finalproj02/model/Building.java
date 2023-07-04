@@ -18,6 +18,13 @@ public abstract class Building extends GameElement {
         this.radius=radius;
     }
 
+    public Building(BuildingType buildingType, int health, String path, double radius){
+        super(path);
+        this.buildingType=buildingType;
+        this.health=health;
+        this.radius=radius;
+    }
+
     public void setHealth(int health) {
         this.health = health;
     }

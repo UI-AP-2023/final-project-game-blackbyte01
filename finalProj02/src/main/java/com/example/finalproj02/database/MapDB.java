@@ -48,7 +48,7 @@ public class MapDB extends GameDB{
     }
 
     private int findMapID(int playerID) throws SQLException {
-        System.out.println("playerID: " + playerID);
+        //System.out.println("playerID: " + playerID);
         super.setSQLCommand(String.format("SELECT `map-id` FROM `maps` WHERE `maps`.`player-id`='%s'", playerID));
         ResultSet resultSet=executeQuerySQLCommand();
         int mapID=0;
@@ -66,6 +66,7 @@ public class MapDB extends GameDB{
         buildings.addAll(building3DB.findMapBuilding3s(mapID));
         buildings.addAll(building4DB.findMapBuilding4s(mapID));
         buildings.addAll(building5DB.findMapBuilding5s(mapID));
+        System.out.println("map db: " + buildings.size());
         return buildings;
     }
 

@@ -39,7 +39,7 @@ public class SignupController implements Initializable {
     @FXML
     void signupBtn(ActionEvent event) throws IOException, SQLException {  // chosing level here
         int playerID=playerController.signup(usernameTf.getText(), passwordTf.getText(),  0, 0, 0);
-        player=new Player(playerID, usernameTf.getText(), "player", passwordTf.getText(), 0, 0, 0);
+        player=new Player(playerID, usernameTf.getText(), "player", passwordTf.getText(), 1, 0, 0);
         new HomeApplication(player).start((Stage) ((Node)event.getSource()).getScene().getWindow());
     }
 
