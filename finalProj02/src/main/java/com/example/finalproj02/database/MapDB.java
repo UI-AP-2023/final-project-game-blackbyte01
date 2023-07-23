@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MapDB extends GameDB{
-    public static MapDB instance=new MapDB();
+public class MapDB extends GameDB {
+    public static MapDB instance = new MapDB();
     private final Building1DB building1DB;
     private final Building2DB building2DB;
     private final Building3DB building3DB;
@@ -29,53 +29,51 @@ public class MapDB extends GameDB{
     public void insertMap(Map map) throws SQLException {
         super.setSQLCommand(String.format("INSERT INTO `maps` (`map-id`, `player-id`) VALUES (NULL, '%s')", map.getPlayerID()));
         executeSQLCommand();
-        int mapID=findMapID(map.getPlayerID());
+        int mapID = findMapID(map.getPlayerID());
         System.out.println(mapID);
         super.setSQLCommand(String.format("UPDATE `players` SET `map-id`='%s' WHERE `players`.`player-id`='%s'", mapID, map.getPlayerID()));
         executeSQLCommand();
-        for(Building a: map.getBuildings()){
-            if(a instanceof Building1)
+        for (Building a : map.getBuildings()) {
+            if (a instanceof Building1)
                 building1DB.insertBuilding1(mapID, (Building1) a);
-            else if(a instanceof Building2)
+            else if (a instanceof Building2)
                 building2DB.insertBuilding2(mapID, (Building2) a);
-            else if(a instanceof Building3)
+            else if (a instanceof Building3)
                 building3DB.insertBuilding3(mapID, (Building3) a);
-            else if(a instanceof Building4)
+            else if (a instanceof Building4)
                 building4DB.insertBuilding4(mapID, (Building4) a);
-            else if(a instanceof Building5)
+            else if (a instanceof Building5)
                 building5DB.insertBuilding5(mapID, (Building5) a);
         }
     }
 
     private int findMapID(int playerID) throws SQLException {
-        //System.out.println("playerID: " + playerID);
         super.setSQLCommand(String.format("SELECT `map-id` FROM `maps` WHERE `maps`.`player-id`='%s'", playerID));
-        ResultSet resultSet=executeQuerySQLCommand();
-        int mapID=0;
-        while (resultSet.next()){
-            mapID=resultSet.getInt("map-id");
+        ResultSet resultSet = executeQuerySQLCommand();
+        int mapID = 0;
+        while (resultSet.next()) {
+            mapID = resultSet.getInt("map-id");
             System.out.println("result set: " + resultSet.getInt("map-id"));
         }
         return mapID;
     }
 
     public ArrayList<Building> findMapBuilding(int mapID) throws SQLException {
-        ArrayList<Building> buildings=new ArrayList<>();
+        ArrayList<Building> buildings = new ArrayList<>();
         buildings.addAll(building1DB.findMapBuilding1s(mapID));
         buildings.addAll(building2DB.findMapBuilding2s(mapID));
         buildings.addAll(building3DB.findMapBuilding3s(mapID));
         buildings.addAll(building4DB.findMapBuilding4s(mapID));
         buildings.addAll(building5DB.findMapBuilding5s(mapID));
-        System.out.println("map db: " + buildings.size());
         return buildings;
     }
 
     public Map findMap(int playerID) throws SQLException {
         super.setSQLCommand(String.format("SELECT `map-id` FROM `maps` WHERE `maps`.`player-id`='%s'", playerID));
-        ResultSet resultSet=executeQuerySQLCommand();
-        int mapID=0;
-        while (resultSet.next()){
-            mapID=resultSet.getInt("map-id");
+        ResultSet resultSet = executeQuerySQLCommand();
+        int mapID = 0;
+        while (resultSet.next()) {
+            mapID = resultSet.getInt("map-id");
         }
         return new Map(mapID, playerID, findMapBuilding(mapID));
     }

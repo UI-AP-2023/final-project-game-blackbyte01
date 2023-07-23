@@ -10,9 +10,9 @@ abstract public class GameDB {
     private Statement statement;
     private String SQLCommand;
 
-    public GameDB(){
+    public GameDB() {
         try {
-            dbConnection=new DBConnection("jdbc:mysql://localhost/game", "root", "");
+            dbConnection = new DBConnection("jdbc:mysql://localhost/game", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -38,18 +38,18 @@ abstract public class GameDB {
         this.SQLCommand = SQLCommand;
     }
 
-    public void executeSQLCommand(){   // executeUpdate() method
+    public void executeSQLCommand() {   // executeUpdate() method
         try {
-            statement=dbConnection.getConnection().prepareStatement(SQLCommand);
+            statement = dbConnection.getConnection().prepareStatement(SQLCommand);
             statement.execute(SQLCommand);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ResultSet executeQuerySQLCommand(){
+    public ResultSet executeQuerySQLCommand() {
         try {
-            statement=dbConnection.getConnection().prepareStatement(SQLCommand);
+            statement = dbConnection.getConnection().prepareStatement(SQLCommand);
             return statement.executeQuery(SQLCommand);
         } catch (SQLException e) {
             e.printStackTrace();

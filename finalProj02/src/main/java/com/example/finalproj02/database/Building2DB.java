@@ -6,25 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Building2DB extends GameDB{
-    public static Building2DB instance=new Building2DB();
+public class Building2DB extends GameDB {
+    public static Building2DB instance = new Building2DB();
 
-    private Building2DB() {}
+    private Building2DB() {
+    }
 
     public static Building2DB getInstance() {
         return instance;
     }
 
-    public void insertBuilding2(int mapID, Building2 building2){
+    public void insertBuilding2(int mapID, Building2 building2) {
         super.setSQLCommand(String.format("INSERT INTO `building2s`(`map-id`, `x`, `y`, `width`, `height`) VALUES ('%s','%s','%s','%s','%s')", mapID, building2.getMinX(), building2.getMinY(), building2.getImageView().getFitWidth(), building2.getImageView().getFitHeight()));
         executeSQLCommand();
     }
 
     public ArrayList<Building2> findMapBuilding2s(int mapID) throws SQLException {
         super.setSQLCommand(String.format("SELECT * FROM `building2s` WHERE `building2s`.`map-id`='%s'", mapID));
-        ResultSet resultSet=executeQuerySQLCommand();
-        ArrayList<Building2> building2s=new ArrayList<>();
-        while (resultSet.next()){
+        ResultSet resultSet = executeQuerySQLCommand();
+        ArrayList<Building2> building2s = new ArrayList<>();
+        while (resultSet.next()) {
             building2s.add(new Building2(resultSet.getDouble("x"), resultSet.getDouble("y"), resultSet.getDouble("width"), resultSet.getDouble("height")));
         }
         return building2s;
