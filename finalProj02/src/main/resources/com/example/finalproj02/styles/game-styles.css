@@ -1,9 +1,9 @@
 #heroPane{
-    -fx-background-color: rgb(225, 225, 225, 0.5);
+    -fx-background-color: rgb(204, 170, 0, 0.3);
     -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-border-width: 0;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
 }
 
 #heroPane:selected{
@@ -15,9 +15,36 @@
 }
 
 #resultLbl{
-    -fx-background-color: rgb(0,0,0, 0.5);
+    -fx-background-color: rgb(26,13,0, 0.7);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-width: 5;
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 20;
+    -fx-alignment: center;
+    -fx-border-color: rgb(204, 170, 0, 0.5);
+}
+
+.label{
+    -fx-background-color: rgb(26,13,0, 0.7);
+    -fx-border-radius: 10;
+    -fx-border-width: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 20;
+    -fx-alignment: center;
+    -fx-border-color: rgb(204, 170, 0, 0.5);
+}
+
+#resultPane{
+    -fx-background-color: rgb(26,13,0, 0.7);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+}
+
+#gameAnchorPane{
+    -fx-background-color: rgb(26,13,0);
 }

@@ -1,0 +1,45 @@
+.dialog-pane{
+    -fx-border-color:rgb(26,13,0);
+    -fx-border-width:0px;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-background-color:rgb(26,13,0);
+}
+
+.dialog-pane > .content.label {
+    -fx-background-color: rgb(26,13,0);
+    -fx-text-fill:rgb(204, 170, 0, 0.3);
+    -fx-font-size:20px;
+    -fx-font-family: Gabriola;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: rgb(204, 170, 0, 0.3);
+}
+
+.dialog-pane .header-panel .label{
+    -fx-background-color: transparent;
+    -fx-text-fill:rgb(26,13,0);
+    -fx-font-size:20px;
+    -fx-font-family: Gabriola;
+}
+
+.dialog-pane .button{
+    -fx-background-color:rgb(204, 170, 0, 0.3);
+    -fx-text-fill: rgb(26,13,0);
+    -fx-cursor:hand;
+    -fx-font-family: Gabriola;
+}
+
+.dialog-pane .button:hover{
+    -fx-background-color: rgb(204, 170, 0, 0.3);
+    -fx-text-fill:rgb(26,13,0);
+    -fx-font-family: Gabriola;
+}
+
+.dialog-pane .button:pressed {
+    -fx-background-color: rgb(204, 170, 0, 0.7);
+    -fx-text-fill: rgb(26,13,0);
+    -fx-font-family: Gabriola;
+}

@@ -1,5 +1,7 @@
 .tab-pane:top{
-    -fx-background-color: rgb(0,0,0,0.5);
+    -fx-background-color: rgb(26,13,0, 0.7);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-pref-height: 500;
     -fx-border-color: transparent;
 }
@@ -20,7 +22,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
     -fx-font-family: "Comic Sans MS";
     -fx-alignment: center;
 }
@@ -36,13 +38,13 @@
 
 
 .tab:focused{
-    -fx-background-color: rgb(225, 225, 225,0.5);
+    -fx-background-color: rgb(204, 170, 0, 0.4);
     -fx-border-color: transparent;
     -fx-focus-color: transparent;
 }
 
 .tab:selected{
-    -fx-background-color: rgb(225, 225, 225, 0.5);
+    -fx-background-color: rgb(204, 170, 0, 0.4);
     -fx-border-color: transparent;
     -fx-focus-color: transparent;
 }
@@ -51,7 +53,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
     -fx-font-family: "Comic Sans MS";
 }
 
@@ -59,7 +61,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
     -fx-font-family: "Comic Sans MS";
     -fx-font-size: 20;
 }
@@ -68,21 +70,37 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: rgb(225,225,225,0.8);
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
     -fx-font-family: "Comic Sans MS";
     -fx-font-size: 20;
 }
 
 #bgImagePane{
-    -fx-background-color: rgb(225, 225, 225, 0.35);
+    -fx-background-color: rgb(204, 170, 0, 0.3);
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
 
 .pane{
-    -fx-background-color: rgb(225, 225, 225, 0.35);
+    -fx-background-color: rgb(204, 170, 0, 0.3);
     -fx-border-color: transparent;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
+}
+
+.button{
+    -fx-border-color: rgb(204, 170, 0, 0.5);
+    -fx-border-radius: 5;
+    -fx-background-color: rgb(0,0,0, 0);
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: rgb(204, 170, 0, 0.5);
+}
+
+.button:hover {
+    -fx-border-color: rgb(204, 170, 0, 0.5);
+    -fx-border-radius: 5;
+    -fx-background-color: rgb(204, 170, 0, 0.3);
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: rgb(26,13,0, 0.6);
 }
