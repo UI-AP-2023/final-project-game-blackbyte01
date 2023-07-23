@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MapApplication extends Application {
-    int playerID;
+    Player player;
 
     public static void main(String[] args) {
         launch(args);
@@ -17,16 +17,16 @@ public class MapApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MapControllerGUI.class.getResource("/com/example/finalproj02/map-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MapController.class.getResource("/com/example/finalproj02/fxmls/map-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        MapControllerGUI mapController=fxmlLoader.getController();
-        mapController.playerID=playerID;
-        primaryStage.setTitle("Map Page");
+        MapController playGroundController = fxmlLoader.getController();
+        playGroundController.player = player;
+        primaryStage.setTitle("Login Page");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public MapApplication(int playerID){
-        this.playerID=playerID;
+    public MapApplication(Player player) {
+        this.player = player;
     }
 }

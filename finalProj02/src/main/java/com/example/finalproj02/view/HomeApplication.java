@@ -18,13 +18,13 @@ public class HomeApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HomeController.class.getResource("/com/example/finalproj02/home-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HomeController.class.getResource("/com/example/finalproj02/fxmls/home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        HomeController homeController=fxmlLoader.getController();
-        homeController.player=player;
-        homeController.show();
+        HomeController homeController = fxmlLoader.getController();
+        homeController.player = player;
+        homeController.show00();
+        //System.out.println("30: " + player.getMap().getMapID());
         homeController.previewMap();
-        //homeController.show1();
         homeController.show2();
         homeController.show3();
         homeController.show4();
@@ -33,9 +33,11 @@ public class HomeApplication extends Application {
         primaryStage.show();
     }
 
-    public HomeApplication(Player player){
+    public HomeApplication(Player player) {
         System.out.println(player);
-        this.player=player;
+        this.player = player;
     }
-    public HomeApplication(){}
+
+    public HomeApplication() {
+    }
 }
