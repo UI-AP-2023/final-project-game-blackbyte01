@@ -10,33 +10,33 @@ public class Player {
     private int lostBattles;
     private Map map;
 
-    public Player(int playerID, String username, String nickname, String password, int level, int wonBattles, int lostBattles, Map map){
-        this.playerID=playerID;
-        this.username=username;
-        this.nickname=nickname;
-        this.password=password;
-        this.wonBattles=wonBattles;
-        this.lostBattles=lostBattles;
-        this.level=level;
-        this.map=map;
+    public Player(int playerID, String username, String nickname, String password, int level, int wonBattles, int lostBattles, Map map) {
+        this.playerID = playerID;
+        this.username = username;
+        this.nickname = nickname;
+        this.password = password;
+        this.wonBattles = wonBattles;
+        this.lostBattles = lostBattles;
+        this.level = level;
+        this.map = map;
     }
 
-    public Player(String username, String password, int level, int wonBattles, int lostBattles){
-        this.username=username;
-        this.password=password;
-        this.wonBattles=wonBattles;
-        this.lostBattles=lostBattles;
-        this.level=level;
+    public Player(String username, String password, int level, int wonBattles, int lostBattles) {
+        this.username = username;
+        this.password = password;
+        this.wonBattles = wonBattles;
+        this.lostBattles = lostBattles;
+        this.level = level;
     }
 
-    public Player(int playerID, String username, String nickname, String password, int level, int wonBattles, int lostBattles){
-        this.playerID=playerID;
-        this.username=username;
-        this.nickname=nickname;
-        this.password=password;
-        this.wonBattles=wonBattles;
-        this.lostBattles=lostBattles;
-        this.level=level;
+    public Player(int playerID, String username, String nickname, String password, int level, int wonBattles, int lostBattles) {
+        this.playerID = playerID;
+        this.username = username;
+        this.nickname = nickname;
+        this.password = password;
+        this.wonBattles = wonBattles;
+        this.lostBattles = lostBattles;
+        this.level = level;
     }
 
     public int getPlayerID() {
@@ -97,7 +97,7 @@ public class Player {
 
     @Override
     public String toString() {
-        if(map==null){
+        if (map == null) {
             return "ID: " + playerID +
                     "\nusername:  " + username +
                     "\npassword:  " + password +
