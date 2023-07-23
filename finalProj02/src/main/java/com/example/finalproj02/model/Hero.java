@@ -1,38 +1,49 @@
 package com.example.finalproj02.model;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Bounds;
+import javafx.animation.*;
+import javafx.event.ActionEvent;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public abstract class Hero extends GameElement{
+public abstract class Hero extends GameElement {
     private int health;
     private final int damage;
-    double mousePressedY, mousePressedX;
+    private final int speed;
+    public double mousePressedY, mousePressedX;
     private boolean isAttacking;
     private boolean isWalking;
     private Building building;
     private double targetRadius;
-    private Timeline timeline;
     private int level;
-    private boolean attackIsOver;
-    int trainTime;
-    public Hero(int health, int damage, String path, double x, double y, double width, double height) {
-        super(path, x, y, width, height);
-        this.health=health;
-        this.damage=damage;
+    private ArrayList<ImageView> sprites;
+    private ArrayList<ImageView> sprites0;
+    private Timeline attackTimeLine;
+    private Group group;
+    private Group rotatedGroup;
+
+    public Hero(String name, int health, int damage, int speed, String path, double x, double y, double width, double height) {
+        super(name, path, x, y, width, height);
+        this.health = health;
+        this.damage = damage;
+        this.speed = speed;
+        group = new Group();
+        rotatedGroup = new Group();
+        attackTimeLine = new Timeline();
     }
 
-    public Hero(int health, int damage, String path){
-        super(path);
-        this.health=health;
-        this.damage=damage;
+    public Hero(String name, int health, int damage, int speed, String path) {
+        super(name, path);
+        this.health = health;
+        this.damage = damage;
+        this.speed = speed;
     }
 
     public int getLevel() {
@@ -43,25 +54,36 @@ public abstract class Hero extends GameElement{
         this.level = level;
     }
 
-    public void stopTimeLine(){
-        timeline.pause();
+    public Group getGroup() {
+        return group;
+    }
+
+    public Timeline getAttackTimeLine() {
+        return attackTimeLine;
+    }
+
+    public Group getRotatedGroup() {
+        return rotatedGroup;
+    }
+
+    public void setSprites0(ArrayList<ImageView> sprites0) {
+        this.sprites0 = sprites0;
+    }
+
+    public void setSprites(ArrayList<ImageView> sprites) {
+        this.sprites = sprites;
     }
 
     public Building getBuilding() {
         return building;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public Timeline getTimeline() {
-        return timeline;
-    }
-
-    public void setTimeline(Timeline timeline) {
-        this.timeline = timeline;
     }
 
     public void setBuilding(Building building) {
@@ -92,43 +114,12 @@ public abstract class Hero extends GameElement{
         this.targetRadius = targetRadius;
     }
 
-    public void method1(Pane pane, ArrayList<Hero> heroes){
-        AtomicReference<Hero> heroAtomicReference=new AtomicReference<>();
-        imageView.setOnMousePressed(e -> {
-            heroAtomicReference.set(copyHero());
-            pane.getChildren().add(heroAtomicReference.get().getImageView());
-            mousePressedX=e.getSceneX()-heroAtomicReference.get().getImageView().getTranslateX();
-            mousePressedY=e.getSceneY()-heroAtomicReference.get().getImageView().getTranslateY();
-        });
-
-        imageView.setOnMouseDragged(e->{
-            heroAtomicReference.get().getImageView().setTranslateX(e.getSceneX()-mousePressedX);
-            heroAtomicReference.get().getImageView().setTranslateY(e.getSceneY()-mousePressedY);
-        });
-
-        imageView.setOnMouseReleased(e->{  // check position released
-            heroes.add(heroAtomicReference.get());
-            //System.out.println(heroes);
-        });
-    }
-
-    private Hero copyHero(){
-        if(this instanceof Hero1)
-            return ((Hero1) this).getCopy();
-        else if(this instanceof Hero2)
-            return ((Hero2) this).getCopy();
-        else if(this instanceof Hero3)
-            return ((Hero3) this).getCopy();
-        else if(this instanceof Hero4)
-            return ((Hero4) this).getCopy();
-        else
-            return ((Hero5) this).getCopy();
-    }
-
     @Override
     public String toString() {
-        return "\nhealth: " + health +
-                "\ndamage: " + damage;
+        return  "\nname: " + super.getName() +
+                "\nhealth: " + health +
+                "\ndamage: " + damage +
+                "\nspeed: " + speed;
     }
 
     public boolean isAttacking() {
@@ -139,14 +130,14 @@ public abstract class Hero extends GameElement{
         return isWalking;
     }
 
-    public Building findNeatestBuilding(ArrayList<Building> buildings){
-        double minDistance=1000, distance;
-        Building building=null;
-        for(Building a: buildings){
-            distance=getDistance(a);
-            if(distance<minDistance){
-                minDistance=distance;
-                building=a;
+    public Building findNeatestBuilding(ArrayList<Building> buildings) {
+        double minDistance = 100000, distance;
+        Building building = null;
+        for (Building a : buildings) {
+            distance = getDistance(a);
+            if (distance < minDistance) {
+                minDistance = distance;
+                building = a;
             }
         }
         return building;
@@ -154,37 +145,79 @@ public abstract class Hero extends GameElement{
 
     public abstract void findBestBuilding(ArrayList<Building> buildings);
 
-    public void setTranslateTarget(TranslateTransition translateTransition){
-        if((this.getBounds().getCenterX()<building.getBounds().getCenterX()) && (this.getBounds().getCenterY()<building.getBounds().getCenterY())){
-            translateTransition.setToX(building.getBounds().getCenterX()-this.centerX-targetRadius);
-            translateTransition.setToY(building.getBounds().getCenterY()-this.centerY-targetRadius);
+    public void setTranslateTarget(TranslateTransition translateTransition) {
+        if ((this.getBounds().getCenterX() < building.getBounds().getCenterX()) && (this.getBounds().getCenterY() < building.getBounds().getCenterY())) {
+            translateTransition.setToX(building.getBounds().getCenterX() - this.centerX - targetRadius);
+            translateTransition.setToY(building.getBounds().getCenterY() - this.centerY - targetRadius);
+        } else if ((this.getBounds().getCenterX() > building.getBounds().getCenterX()) && (this.getBounds().getCenterY() < building.getBounds().getCenterY())) {
+            translateTransition.setToX(building.getBounds().getCenterX() - this.centerX + targetRadius);
+            translateTransition.setToY(building.getBounds().getCenterY() - this.centerY - targetRadius);
+        } else if ((this.getBounds().getCenterX() > building.getBounds().getCenterX()) && (this.getBounds().getCenterY() > building.getBounds().getCenterY())) {
+            translateTransition.setToX(building.getBounds().getCenterX() - this.centerX + targetRadius);
+            translateTransition.setToY(building.getBounds().getCenterY() - this.centerY + targetRadius);
+        } else {
+            translateTransition.setToX(building.getBounds().getCenterX() - this.centerX - targetRadius);
+            translateTransition.setToY(building.getBounds().getCenterY() - this.centerY + targetRadius);
         }
-        else if((this.getBounds().getCenterX()>building.getBounds().getCenterX()) && (this.getBounds().getCenterY()<building.getBounds().getCenterY())){
-            translateTransition.setToX(building.getBounds().getCenterX()-this.centerX+targetRadius);
-            translateTransition.setToY(building.getBounds().getCenterY()-this.centerY-targetRadius);
-        }
-        else if((this.getBounds().getCenterX()>building.getBounds().getCenterX()) && (this.getBounds().getCenterY()>building.getBounds().getCenterY())){
-            translateTransition.setToX(building.getBounds().getCenterX()-this.centerX+targetRadius);
-            translateTransition.setToY(building.getBounds().getCenterY()-this.centerY+targetRadius);
-        }
-        else{
-            translateTransition.setToX(building.getBounds().getCenterX()-this.centerX-targetRadius);
-            translateTransition.setToY(building.getBounds().getCenterY()-this.centerY+targetRadius);
-        }
-        setWalking(true);
-        translateTransition.play();
     }
 
-    public boolean isInArea(){
-        double xDistance=Math.abs(building.getBounds().getCenterX()-this.getBounds().getCenterX());
-        double yDistance=Math.abs(building.getBounds().getCenterY()-this.getBounds().getCenterY());
-        return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2)) <= (targetRadius);
-    }
-
-    public double getDistance(Building building){
-        double xDistance=Math.abs(building.getBounds().getCenterX()-this.getBounds().getCenterX());
-        double yDistance=Math.abs(building.getBounds().getCenterY()-this.getBounds().getCenterY());
+    public double getDistance(Building building) {
+        double xDistance = Math.abs(building.getBounds().getCenterX() - this.getBounds().getCenterX());
+        double yDistance = Math.abs(building.getBounds().getCenterY() - this.getBounds().getCenterY());
         return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
     }
 
+    public ArrayList<Image> imagePaths(ArrayList<String> paths) {
+        ArrayList<Image> images = new ArrayList<>();
+        paths.forEach(n -> images.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(n)))));
+        return images;
+    }
+
+    public ArrayList<ImageView> imageViewImages(ArrayList<Image> images) {
+        ArrayList<ImageView> imageViews = new ArrayList<>();
+        for (Image a : images) {
+            ImageView imageView = new ImageView(a);
+            imageView.setFitWidth(80);
+            imageView.setFitHeight(80);
+            imageViews.add(imageView);
+        }
+        return imageViews;
+    }
+
+    public Timeline animateImageViews() {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        int i = 1;
+        for (ImageView a : sprites) {
+            timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * i), (ActionEvent e) -> {
+                if (this.getBounds().getMinX() <= this.getBuilding().getBounds().getMinX()) {
+                    a.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+                    group.getChildren().setAll(a);
+                } else {
+                    a.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                    group.getChildren().setAll(a);
+                }
+            }));
+            ++i;
+        }
+        return timeline;
+    }
+
+    public TranslateTransition translateAnimation(Building building) {
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(group);
+        translateTransition.setDuration(Duration.millis(10000));
+        setTranslateTarget0(translateTransition, building);
+        translateTransition.setAutoReverse(false);
+        return translateTransition;
+    }
+
+    public void setTranslateTarget0(TranslateTransition translateTransition, Building building) {
+        translateTransition.setToX(building.getMinX() - group.getLayoutX());
+        translateTransition.setToY(building.getMinY() - group.getLayoutY());
+    }
+
+    public boolean isInArea0() {
+        return this.getGroup().getLayoutX() + this.getGroup().getTranslateX() == getBuilding().getMinX() && this.getGroup().getLayoutY() + this.getGroup().getTranslateY() == this.getBuilding().getMinY();
+    }
 }

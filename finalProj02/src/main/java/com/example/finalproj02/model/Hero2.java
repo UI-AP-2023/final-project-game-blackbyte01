@@ -4,47 +4,57 @@ import javafx.animation.TranslateTransition;
 
 import java.util.ArrayList;
 
-public class Hero2 extends Hero{
+public class Hero2 extends Hero {
     public Hero2(double x, double y, double width, double height) {
-        super(5, 1, "/com/example/finalproj02/images/swordswoman.png", x, y, width, height);
+        super("sword viking", 5, 1, 150, "/com/example/finalproj02/images/elements/sprites/sword-man/swordMan00.png", x, y, width, height);
+        setLevel(1);
+        setSprites(imageViewImages(imagePaths(getSpritePaths())));
+    }
+
+    public Hero2() {
+        super("sword viking", 5, 1, 150, "/com/example/finalproj02/images/elements/sprites/sword-man/swordMan00.png");
         setLevel(1);
     }
 
-    public Hero2(){
-        super(5, 1, "/com/example/finalproj02/images/swordswoman.png");
-        setLevel(1);
-    }
-
-    public Hero2 getCopy(){
+    public Hero2 getCopy() {
         return new Hero2(this.getMinX(), this.getMinY(), this.getImageView().getFitWidth(), this.getImageView().getFitHeight());
     }
 
-    public void findBestBuilding(ArrayList<Building> buildings){
-        ArrayList<Building> matchBuilding=new ArrayList<>();
-        for(Building a: buildings){
-            if((a instanceof Building3) || (a instanceof Building2)){
+    public void findBestBuilding(ArrayList<Building> buildings) {
+        ArrayList<Building> matchBuilding = new ArrayList<>();
+        for (Building a : buildings) {
+            if ((a instanceof Building3) || (a instanceof Building2)) {
                 matchBuilding.add(a);
             }
         }
         setBuilding(findNeatestBuilding(matchBuilding));
-        //return getBuilding();
     }
 
-    public void setTranslateTarget(TranslateTransition translateTransition){
-        if(getBuilding()!=null){
+    public void setTranslateTarget(TranslateTransition translateTransition) {
+        if (getBuilding() != null) {
             setTargetRadius(getBuilding().getRadius());
             super.setTranslateTarget(translateTransition);
         }
     }
 
-    public boolean isInArea(){
-        double xDistance=Math.abs(getBuilding().getBounds().getCenterX()-this.getBounds().getCenterX());
-        double yDistance=Math.abs(getBuilding().getBounds().getCenterY()-this.getBounds().getCenterY());
-        return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2)) <= (getTargetRadius()+50);
+    public ArrayList<String> getSpritePaths() {
+        ArrayList<String> paths = new ArrayList<>();
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan00.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan01.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan02.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan03.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan04.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan05.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan06.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan07.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan08.png");
+        paths.add("/com/example/finalproj02/images/elements/sprites/sword-man/swordMan09.png");
+        return paths;
     }
+
 
     @Override
     public String toString() {
-        return "name: Hero2" + super.toString();
+        return super.toString();
     }
 }
