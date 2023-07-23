@@ -8,24 +8,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MapApplication0 extends Application {
+public class UpgradeMapApplication extends Application {
     Player player;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MapController0.class.getResource("/com/example/finalproj02/map0-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MapController.class.getResource("/com/example/finalproj02/fxmls/upgrade-map-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        MapController0 playGroundController=fxmlLoader.getController();
-        playGroundController.player=player;
+        UpgradeMapController upgradeMapController = fxmlLoader.getController();
+        upgradeMapController.player = player;
+        upgradeMapController.show();
         primaryStage.setTitle("Login Page");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public MapApplication0(Player player){
-        this.player=player;
+    public UpgradeMapApplication(Player player) {
+        this.player = player;
     }
 }
