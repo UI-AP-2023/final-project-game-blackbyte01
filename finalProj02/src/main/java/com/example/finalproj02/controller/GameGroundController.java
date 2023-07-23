@@ -11,12 +11,15 @@ import java.util.HashMap;
 
 public class GameGroundController {
     private GameGround gameGround;
-    private static GameGroundController instance=new GameGroundController();
-    private GameGroundController(){
+    private static final GameGroundController instance = new GameGroundController();
+
+    private GameGroundController() {
     }
+
     public static GameGroundController getInstance() {
         return instance;
     }
+
     public GameGround getGameGround() {
         return gameGround;
     }

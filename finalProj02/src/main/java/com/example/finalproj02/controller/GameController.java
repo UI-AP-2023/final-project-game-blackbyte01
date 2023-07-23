@@ -14,9 +14,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class GameController {
-    private static GameController instance=new GameController();
+    private static final GameController instance = new GameController();
     private Game game;
-    private GameController(){
+
+    private GameController() {
     }
 
     public static GameController getInstance() {
